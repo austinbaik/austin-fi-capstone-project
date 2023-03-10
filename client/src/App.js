@@ -26,3 +26,12 @@ export default App;
 
 
 //adding a github change 
+
+
+// validate :must_have_flatiron_email
+
+// def must_have_flatiron_email
+//   unless email.match?(/flatironschool.com/)
+//     errors.add(:email, "We're only allowed to have people who work for the company in the database!")
+//   end
+// end
