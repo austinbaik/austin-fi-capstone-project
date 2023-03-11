@@ -1,24 +1,30 @@
 import logo from './logo.svg';
+import React, { useContext, useState } from "react";
 import './App.css';
+import {AgentContext} from "./context/agent.js"
+
+import Landing from './Landing'
 
 function App() {
+
+const [hello, setHello] = useState("hello")
+
+  const value = useContext(AgentContext)
+
+console.log( value ) 
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <div>
+    Testing...
+
+    {value}
+
+
+    
+
+    <Landing hello={hello}/>
+
+    </div> 
   );
 }
 

@@ -3,10 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { AgentProvider } from './context/agent';
 
 ReactDOM.render(
   <React.StrictMode>
+    <AgentProvider>
     <App />
+    </AgentProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

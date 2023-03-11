@@ -2,12 +2,14 @@ import React, { useState } from "react";
 
 
 
-function Landing() {
+function Landing( {hello} ) {
 
     return (
         <div>
 
             <h1> Support Home </h1>
+
+                <div>{hello}</div>
 
 
             <h2> Customer Log-in </h2>
