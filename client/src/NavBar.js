@@ -5,17 +5,17 @@ import { Link, useNavigate } from "react-router-dom";
 
 function NavBar({ agent, setAgent }) {
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  // function handleLogoutClick() {
-  //   fetch("/logout", { method: "DELETE" }).then((r) => {
-  //     if (r.ok) {
-  //       navigate("/")
-  //       setUser(null)
+  function handleLogoutClick() {
+    fetch("/logout", { method: "DELETE" }).then((r) => {
+      if (r.ok) {
+        navigate("/")
+        setAgent(null)
         
-  //     } 
-  //   });
-  // }
+      } 
+    });
+  }
 
   return (
     <header  align='center'>
@@ -30,7 +30,7 @@ function NavBar({ agent, setAgent }) {
 
         {agent ? (
           <>
-          <button > Logout </button>
+          <button onClick={handleLogoutClick}> Logout </button>
           </>
 
         ) : (

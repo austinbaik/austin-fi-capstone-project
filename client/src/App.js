@@ -38,7 +38,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Landing agent={agent} />} />
           <Route path="/signup" element={<SignUp setAgent={setAgent} />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Login setAgent={setAgent}/>} />
           <Route path="/home" element={<AgentHome agent={agent} />} />
 
         </Routes>

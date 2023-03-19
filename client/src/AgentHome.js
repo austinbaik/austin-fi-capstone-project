@@ -7,16 +7,13 @@ function AgentHome() {
     return (
         <div>
 
-            "build out Agent home "
 
-                    "Nav Bar"
+            <h2> My Open Cases </h2>
 
-            "My Open Cases"
-
-            "All Unassigned Cases"
+            <h2> All Unassigned Cases </h2>
 
 
-            "All Closed Cases"
+            <h2> All Closed Cases </h2>
 
             {/* //link out to All closed cases list */}
 
@@ -31,4 +28,4 @@ function AgentHome() {
 }
 
 
-export default AgentHome
+export default AgentHome;

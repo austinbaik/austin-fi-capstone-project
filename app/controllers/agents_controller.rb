@@ -1,7 +1,9 @@
 class AgentsController < ApplicationController
 
     def create
-        agent = Agent.create(user_params)
+        byebug
+        agent = Agent.create(agent_params)
+        byebug
         if agent.valid?
           session[:user_id] = agent.id #still don't quite understand this
           render json: agent, status: :created
@@ -28,7 +30,7 @@ class AgentsController < ApplicationController
       private
     
       def agent_params
-         params.permit(:username, :password, :password_confirmation)        
+         params.permit(:name, :email, :password, :password_confirmation)        
         # params.require(:user).permit(:username, :password, :password_confirmation)
         #permit allows for key utilization; require mandates that parameter exists --> bc goes through User Controller
       end

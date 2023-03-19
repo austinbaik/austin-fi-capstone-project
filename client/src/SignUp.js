@@ -4,7 +4,9 @@ import { useNavigate } from "react-router-dom";
 
 function SignUp({ setAgent }) {
   const navigate = useNavigate();
-  const [username, setUsername] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [errors, setErrors] = useState([]);
@@ -19,7 +21,8 @@ function SignUp({ setAgent }) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        username,
+        name,
+        email,
         password,
         password_confirmation: passwordConfirmation,
       }),
@@ -37,13 +40,21 @@ function SignUp({ setAgent }) {
     <div>
       <form onSubmit={handleSubmit}>
         <h2>Sign Up</h2>
-        <label htmlFor="username">Username</label>
+        <label htmlFor="name">Name</label>
         <input
           type="text"
-          id="username"
+          id="name"
           autoComplete="off"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+         <label htmlFor="email">Email</label>
+        <input
+          type="text"
+          id="email"
+          autoComplete="off"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <label htmlFor="password">Password</label>
         <input

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 function Login({ setAgent }) {
   const navigate = useNavigate();
-  const [username, setUsername] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
 
@@ -16,12 +16,11 @@ function Login({ setAgent }) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ username, password }),
+      body: JSON.stringify({ name, password }),
     }).then((r) => {
       if (r.ok) {
         r.json().then((agent) => setAgent(agent))
-          // ***** When I get my User object back, I can serilize the reviews and bathrooms for this user in the response - set to state then, pass down the user object, user.reviews, user.bathrooms 
-          .then(navigate("/"));
+          .then(navigate("/home"));
       } else {
        r.json().then((err) => setErrors(err))
       }
@@ -43,13 +42,13 @@ function Login({ setAgent }) {
     <div>
       <form onSubmit={handleSubmit}>
         <h1>Login</h1>
-        <label htmlFor="username">Username</label>
+        <label htmlFor="name">Name</label>
         <input
           type="text"
-          id="username"
+          id="name"
           autoComplete="off"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
         <label htmlFor="password">Password</label>
         <input
