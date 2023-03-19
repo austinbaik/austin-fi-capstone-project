@@ -11,7 +11,7 @@ function NavBar({ agent, setAgent }) {
     fetch("/logout", { method: "DELETE" }).then((r) => {
       if (r.ok) {
         navigate("/")
-        setAgent(null)
+        setAgent()
 
       }
     });
@@ -24,21 +24,21 @@ function NavBar({ agent, setAgent }) {
 
       <div >
 
-
-
         {agent ? (
-
-
-
           <>
-            <button>   <Link to="/home">Home</Link> </button>
+            <button>
+              <Link to="/home">Home</Link>
+            </button>
+            <button>
+              <Link to="/newcase">New Case</Link>
+            </button>
             <button onClick={handleLogoutClick}> Logout </button>
           </>
-
         ) : (
           <>
-            <button>   <Link to="/">Home</Link> </button>
-
+            <button>
+              <Link to="/">Home</Link>
+            </button>
 
             <button>
               <Link to="/signup">Signup</Link>
@@ -49,7 +49,6 @@ function NavBar({ agent, setAgent }) {
             </button>
           </>
         )}
-
 
       </div>
     </header>

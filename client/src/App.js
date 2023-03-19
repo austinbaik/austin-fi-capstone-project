@@ -1,7 +1,7 @@
 import logo from './logo.svg';
-import React, { useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import './App.css';
-// import { AgentContext } from "./context/agent.js"
+import { AgentContext } from "./context/agent.js"
 import {
   Routes,
   Route,
@@ -11,11 +11,12 @@ import SignUp from './SignUp';
 import NavBar from './NavBar';
 import AgentHome from './AgentHome';
 import Landing from './Landing';
-
-// import Landing from './Landing'
+import NewCase from './NewCase';
 
 function App() {
-  const [agent, setAgent] = useState();
+
+  const [agent, setAgent] = useContext(AgentContext)
+  // const [agent, setAgent] = useState();
 
 
   // auto-login:
@@ -38,8 +39,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Landing agent={agent} />} />
           <Route path="/signup" element={<SignUp setAgent={setAgent} />} />
-          <Route path="/login" element={<Login setAgent={setAgent}/>} />
+          <Route path="/login" element={<Login setAgent={setAgent} />} />
           <Route path="/home" element={<AgentHome agent={agent} />} />
+          <Route path="/newcase" element={<NewCase/>} />
 
         </Routes>
 

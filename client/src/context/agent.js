@@ -8,9 +8,9 @@ function AgentProvider({ children }) {
   // the value prop of the provider will be our context data
   // this value will be available to child components of this provider
  
- const [agentUser, setAgentUser] = useState()
+ const [agent, setAgent] = useState()
 
- const value =  [agentUser, setAgentUser]
+ const value = [agent, setAgent]
   return (
 
     <AgentContext.Provider value={value}>

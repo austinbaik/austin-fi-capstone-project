@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-// import { AgentProvider } from './context/agent';
+import { AgentProvider } from './context/agent';
 import {
   BrowserRouter,
 } from "react-router-dom";
@@ -12,7 +12,9 @@ import {
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <AgentProvider>
+        <App />
+      </AgentProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')

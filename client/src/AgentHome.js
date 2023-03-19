@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { AgentContext } from "./context/agent.js"
 
 
 function AgentHome() {
+    const [agent, setAgent] = useContext(AgentContext)
+
+    console.log("agent state in AgentHome", agent)
 
 
     return (
