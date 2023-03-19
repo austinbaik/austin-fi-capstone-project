@@ -1,30 +1,50 @@
 import logo from './logo.svg';
-import React, { useContext, useState } from "react";
+import React, { useState, useEffect } from "react";
 import './App.css';
-import {AgentContext} from "./context/agent.js"
+// import { AgentContext } from "./context/agent.js"
+import {
+  Routes,
+  Route,
+} from "react-router-dom";
+import Login from './Login';
+import SignUp from './SignUp';
+import NavBar from './NavBar';
+import AgentHome from './AgentHome';
+import Landing from './Landing';
 
-import Landing from './Landing'
+// import Landing from './Landing'
 
 function App() {
+  const [agent, setAgent] = useState();
 
-const [hello, setHello] = useState("hello")
 
-  const value = useContext(AgentContext)
+  // auto-login:
+  useEffect(() => {
+    fetch("/me").then((r) => {
+      if (r.ok) {
+        r.json().then((agent) => setAgent(agent));
+      }
+    });
+  }, []);
 
-console.log( value ) 
+
+
 
   return (
-    <div>
-    Testing...
+    <div >
+      <NavBar agent={agent} setAgent={setAgent} />
+      <main>
 
-    {value}
+        <Routes>
+          <Route path="/" element={<Landing agent={agent} />} />
+          <Route path="/signup" element={<SignUp setAgent={setAgent} />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/home" element={<AgentHome agent={agent} />} />
 
+        </Routes>
 
-    
-
-    <Landing hello={hello}/>
-
-    </div> 
+      </main>
+    </div>
   );
 }
 
