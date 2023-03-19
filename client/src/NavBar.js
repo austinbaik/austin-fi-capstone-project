@@ -12,39 +12,44 @@ function NavBar({ agent, setAgent }) {
       if (r.ok) {
         navigate("/")
         setAgent(null)
-        
-      } 
+
+      }
     });
   }
 
   return (
-    <header  align='center'>
+    <header align='center'>
 
       <h1> Support  </h1>
 
       <div >
 
-        <button>
-          <Link to="/">Home</Link>
-        </button>
+
 
         {agent ? (
+
+
+
           <>
-          <button onClick={handleLogoutClick}> Logout </button>
+            <button>   <Link to="/home">Home</Link> </button>
+            <button onClick={handleLogoutClick}> Logout </button>
           </>
 
         ) : (
           <>
+            <button>   <Link to="/">Home</Link> </button>
+
+
             <button>
               <Link to="/signup">Signup</Link>
             </button>
-            
+
             <button>
               <Link to="/login">Login</Link>
             </button>
           </>
         )}
-   
+
 
       </div>
     </header>
