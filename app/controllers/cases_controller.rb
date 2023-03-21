@@ -1,5 +1,13 @@
 class CasesController < ApplicationController
 
-    has_many :comments 
+    
+def index 
+    cases = Case.all 
+    render json: cases
+
+
+end 
+
+    
     
 end

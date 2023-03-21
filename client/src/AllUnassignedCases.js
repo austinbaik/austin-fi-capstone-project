@@ -1,23 +1,51 @@
 //cases that are pending an owner 
 
-import React, {useEffect} from "react";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+
 //component lists the cases assigned to the agent 
 
-function AllUnassignedCases () {
 
+function AllUnassignedCases() {
+
+    const [cases, setCases] = useState([])
 
     useEffect(() => {
-        fetch("/me").then((r) => {
-          if (r.ok) {
-            r.json().then((agent) => setAgent(agent));
-          }
+        fetch("/cases").then((r) => {
+            if (r.ok) {
+                r.json().then((cases) => setCases(cases));
+            }
         });
-      }, []);
-    
+    }, []);
 
+    console.log(cases)
 
     return (
-        <> we'll map the table here </>
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {cases.map(item => {
+                    return (
+                        <Link to="/login">
+                        <tr key={item.id}>
+                            <td>{item.title}</td>
+                            <td>{item.description}</td>
+                            <td>{item.priority}</td>
+                            <td>{item.status}</td>
+                        </tr>
+                        </Link>
+                    );
+                })}
+            </tbody>
+        </table>
+
     )
 }
 
