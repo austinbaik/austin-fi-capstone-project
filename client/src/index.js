@@ -12,9 +12,13 @@ import {
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
+
       <AgentProvider>
-        <App />
+        
+          <App />
+        
       </AgentProvider>
+
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
