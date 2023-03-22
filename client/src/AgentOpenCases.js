@@ -1,20 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import {
+    Link,
+} from "react-router-dom";
+import { CaseContext } from "./context/CaseContext";
+
 //component lists the cases assigned to the agent 
+import CurrentCase from "./CurrentCase";
 
 function AgentOpenCases() {
 
 
-    const [agentCases, setAgentCases] = useState([])
-
-    useEffect(() => {
-        fetch("/cases").then((r) => {
-            if (r.ok) {
-                r.json().then((agentCases) => setAgentCases(agentCases));
-            }
-        });
-    }, []);
-
+    const [cases, setCases] = useContext(CaseContext)
 
 
     return (
@@ -29,14 +25,14 @@ function AgentOpenCases() {
                     </tr>
                 </thead>
                 <tbody>
-                    {agentCases.map(item => {
+                    {cases.map(c => {
                         return (
-                            <Link to="/login">
-                                <tr key={item.id}>
-                                    <td>{item.title}</td>
-                                    <td>{item.description}</td>
-                                    <td>{item.priority}</td>
-                                    <td>{item.status}</td>
+                            <Link to={'/currentcase/' + c.id} >
+                                <tr key={c.id}>
+                                    <td>{c.title}</td>
+                                    <td>{c.description}</td>
+                                    <td>{c.priority}</td>
+                                    <td>{c.status}</td>
                                 </tr>
                             </Link>
                         );

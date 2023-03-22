@@ -8,10 +8,10 @@ Rails.application.routes.draw do
   # Leave this here to help deploy your app later!
 
 
-  get "/me", to: "agents#show"
 
   post "/signup", to: "agents#create"
 
+  get "/me", to: "agents#show"
 
   post "/login", to: "sessions#create"
 

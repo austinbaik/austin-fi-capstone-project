@@ -1,11 +1,10 @@
 class AgentsController < ApplicationController
 
     def create
-        byebug
         agent = Agent.create(agent_params)
-        byebug
         if agent.valid?
           session[:user_id] = agent.id #still don't quite understand this
+          byebug
           render json: agent, status: :created
         else
           render json: { errors: agent.errors.full_messages }, status: :unprocessable_entity
@@ -19,6 +18,7 @@ class AgentsController < ApplicationController
       # end
     
       def show
+
         agent = Agent.find_by(id: session[:user_id])
         if agent
           render json: agent
@@ -26,6 +26,8 @@ class AgentsController < ApplicationController
           render json: { error: "Not authorized" }, status: :unauthorized
         end
       end
+
+      
     
       private
     

@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { AgentProvider } from './context/agent';
+import { CaseProvider } from './context/CaseContext';
 import {
   BrowserRouter,
 } from "react-router-dom";
@@ -14,9 +15,9 @@ ReactDOM.render(
     <BrowserRouter>
 
       <AgentProvider>
-        
+        <CaseProvider>
           <App />
-        
+        </CaseProvider>
       </AgentProvider>
 
     </BrowserRouter>

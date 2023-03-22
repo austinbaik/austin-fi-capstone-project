@@ -6,12 +6,11 @@ import { Link, useNavigate } from "react-router-dom";
 function Landing( {hello} ) {
     // const navigate = useNavigate();
 
+
+
+    
     return (
-        <div>
-
-            <h1> Support Home </h1>
-
-                <div>{hello}</div>
+        <div align='center'>
 
 
             <h2> Customer Log-in </h2>

@@ -20,7 +20,7 @@ function NavBar({ agent, setAgent }) {
   return (
     <header align='center'>
 
-      <h1> Support  </h1>
+      <h1> Support Portal </h1>
 
       <div >
 

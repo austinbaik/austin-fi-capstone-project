@@ -1,5 +1,4 @@
-import logo from './logo.svg';
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import './App.css';
 import { AgentContext } from "./context/agent.js"
 import {
@@ -12,6 +11,7 @@ import NavBar from './NavBar';
 import AgentHome from './AgentHome';
 import Landing from './Landing';
 import NewCase from './NewCase';
+import CurrentCase from './CurrentCase';
 
 function App() {
 
@@ -24,7 +24,9 @@ function App() {
     fetch("/me").then((r) => {
       if (r.ok) {
         r.json().then((agent) => setAgent(agent));
-      }
+      } else (
+        console.log("no user")
+      )
     });
   }, []);
 
@@ -42,6 +44,7 @@ function App() {
           <Route path="/login" element={<Login setAgent={setAgent} />} />
           <Route path="/home" element={<AgentHome agent={agent} />} />
           <Route path="/newcase" element={<NewCase/>} />
+          <Route path="/currentcase/:id" element={<CurrentCase/>} />
 
         </Routes>
 
