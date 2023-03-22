@@ -1,14 +1,10 @@
-import React, { useState } from "react";
+import React, {  } from "react";
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
-function Landing( {hello} ) {
+function Landing() {
     // const navigate = useNavigate();
-
-
-
-    
     return (
         <div align='center'>
 
@@ -17,12 +13,12 @@ function Landing( {hello} ) {
             <h3> Customer Sign-up </h3>
 
 
-            <button>
-              <Link to="/login">Agent Log-in</Link>
+            <button type="button" style={{width:400}} >
+              <Link to="/login">   Agent Log-in   </Link>
             </button>
             <br></br>
-            <button>
-              <Link to="/signup">Creat Agent Account</Link>
+            <button style={{width:400}}>
+              <Link to="/signup">Create Agent Account</Link>
             </button>
 
 

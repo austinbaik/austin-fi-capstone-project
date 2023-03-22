@@ -12,6 +12,7 @@ import AgentHome from './AgentHome';
 import Landing from './Landing';
 import NewCase from './NewCase';
 import CurrentCase from './CurrentCase';
+import AllClosedCases from "./AllClosedCases.js";
 
 function App() {
 
@@ -45,7 +46,7 @@ function App() {
           <Route path="/home" element={<AgentHome agent={agent} />} />
           <Route path="/newcase" element={<NewCase/>} />
           <Route path="/currentcase/:id" element={<CurrentCase/>} />
-
+          <Route path="/allclosedcases" element={<AllClosedCases/>} />
         </Routes>
 
       </main>

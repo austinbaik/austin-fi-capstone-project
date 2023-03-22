@@ -3,7 +3,6 @@ import { AgentContext } from "./context/agent.js"
 import { CaseContext } from "./context/CaseContext.js";
 import AgentOpenCases from "./AgentOpenCases.js";
 import { Link } from "react-router-dom";
-import AllClosedCases from "./AllClosedCases.js";
 import AllUnassignedCases from "./AllUnassignedCases.js";
 
 
@@ -11,7 +10,6 @@ import AllUnassignedCases from "./AllUnassignedCases.js";
 function AgentHome() {
     const [agent, setAgent] = useContext(AgentContext)
     const [cases, setCases] = useContext(CaseContext)
-
     console.log("agent state in AgentHome", agent)
 
     useEffect(() => {
@@ -23,25 +21,19 @@ function AgentHome() {
     }, []);
 
 
-
     if (agent) {
 
-
-
-        
         return (
 
             <div>
 
-                <h2> My Open Cases </h2>
+                <h2> My Open Cases: </h2>
                 <AgentOpenCases />
 
-                <h2> All Unassigned Cases </h2>
+                <h2> All Unassigned Cases: </h2>
                 <AllUnassignedCases />
 
-                <h2> <Link to="/home"> All Closed Cases </Link> </h2>
-
-                {/* //link out to All closed cases list */}
+                <h2> <Link to="/allclosedcases"> All Closed Cases: </Link> </h2>
 
             </div>
         )

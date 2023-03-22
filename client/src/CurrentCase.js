@@ -8,6 +8,7 @@ import {
 
 //need to be able to EDIT and DELETE this case (CRUD) 
 
+// NEED TO MAP ALL THE COMMENTS!!!! 
 
 function CurrentCase() {
 
@@ -20,6 +21,23 @@ function CurrentCase() {
 
     const thisCase = cases.find(c => c.id == id)
     console.log("thisCase", thisCase)
+
+
+
+    const handleDeleteClick = (e) => {
+        e.preventDefault();
+        fetch(`/cases/${thisCase.id}`, {
+            method: "DELETE"
+        }).then((r) => {
+            if (r.ok) {
+                r.json().then((cases) => setCases(cases, "delete"))
+            } else {
+                r.json().then((err) => console.log(err))
+            }
+        }
+        )
+    }
+
 
     return (
         <>
@@ -41,6 +59,12 @@ function CurrentCase() {
                 <td>{thisCase.status}</td>
             </tr> */}
 
+            <button onClick={handleDeleteClick}>
+                <span role="img" aria-label="delete">
+                    🗑
+                </span>
+            </button>
+
         </>
 
 
@@ -49,3 +73,14 @@ function CurrentCase() {
 }
 
 export default CurrentCase;
+
+
+
+
+
+// <button onClick={() => setIsEditing((isEditing) => !isEditing)}>
+// <span role="img" aria-label="edit">
+//     ✏️
+// </span>
+// </button>
+

@@ -11,6 +11,10 @@ function NewCase() {
     const [status, setStatus] = useState("");
     const [customer, setCustomer] = useState("");
 
+    const statuses = ["NEW", "ACTIVE", "CLOSED"]
+    const priorities = ["P0", "P1", "P2"]
+
+    console.log(customer);
     function handleSubmit(e) {
         e.preventDefault();
         fetch("/cases", {
@@ -35,10 +39,16 @@ function NewCase() {
         });
     }
 
+
+    //call useEffect to only get the customer information! 
+    const customers = ["austin", "john", "bob"]
+    // const [customers, setCustomers] = useState([]);
+
+
     return (
 
-        <div>
-            <form onSubmit={handleSubmit}>
+        <div >
+            <form align='center' onSubmit={handleSubmit}>
                 <label htmlFor="title">Title</label>
                 <input
                     type="text"
@@ -52,35 +62,46 @@ function NewCase() {
                 <input
                     type="text"
                     id="description"
+                    size="50"
                     autoComplete="off"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                 />
                 <label htmlFor="priority">priority</label>
-                <input
-                    type="text"
-                    id="priority"
-                    autoComplete="off"
-                    value={priority}
+                <select
+                    id="dropdown"
                     onChange={(e) => setPriority(e.target.value)}
-                />
+                >
+                    {priorities.map(p => {
+                        return (
+                            <option value={p}> {p} </option>
+                        );
+                    })}
+                </select >
                 <label htmlFor="status">status</label>
-                <input
-                    type="text"
-                    id="status"
-                    autoComplete="off"
-                    value={status}
+                <select
+                    id="dropdown"
                     onChange={(e) => setStatus(e.target.value)}
-                />
+                >
+                    {statuses.map(s => {
+                        return (
+                            <option value={s}> {s} </option>
+                        );
+                    })}
+                </select >
 
                 <label htmlFor="customer">customer</label>
-                <input
-                    type="text"
-                    id="customer"
-                    autoComplete="off"
-                    value={customer}
+                <select
+                    id="dropdown"
                     onChange={(e) => setCustomer(e.target.value)}
-                />
+                >
+                    {customers.map(c => {
+                        return (
+                            <option value={c}> {c} </option>
+                        );
+                    })}
+                </select >
+
                 <button type="submit">Submit</button>
 
                 {/* <div>

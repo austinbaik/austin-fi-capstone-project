@@ -39,7 +39,7 @@ function Login({ setAgent }) {
   //   }
 
   return (
-    <div>
+    <div align="center">
       <form onSubmit={handleSubmit}>
         <h1>Login</h1>
         <label htmlFor="name">Name</label>
@@ -52,7 +52,7 @@ function Login({ setAgent }) {
         />
         <label htmlFor="password">Password</label>
         <input
-          type="text"
+          type="password"
           id="password"
           autoComplete="current-password"
           value={password}
