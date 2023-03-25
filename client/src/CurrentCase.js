@@ -1,13 +1,12 @@
 
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { CaseContext } from "./context/CaseContext";
 import {
     useParams
 } from "react-router-dom";
-
+import EditCase from "./EditCase";
 
 //need to be able to EDIT and DELETE this case (CRUD) 
-
 // NEED TO MAP ALL THE COMMENTS!!!! 
 
 function CurrentCase() {
@@ -15,6 +14,7 @@ function CurrentCase() {
     let { id } = useParams();
     //take the id and match to the object from context and render 
     const [cases, setCases] = useContext(CaseContext)
+    const [isEditing, setIsEditing] = useState(false);
 
     console.log("id", id)
     console.log("cases", cases)
@@ -43,9 +43,9 @@ function CurrentCase() {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-              },
-              body: JSON.stringify({ id }),
-            }).then((r) => {
+            },
+            body: JSON.stringify({ id }),
+        }).then((r) => {
             if (r.ok) {
                 r.json().then((cases) => setCases(cases))
             } else {
@@ -58,14 +58,16 @@ function CurrentCase() {
     if (thisCase) {
         return (
             <>
-                <h1>Open Case</h1>
+                <h1>{thisCase.title}</h1>
 
 
-                <h2>Case Title</h2>
-                {thisCase.title}
-                <h3>Case Description</h3>
+                <h3>Case Description:</h3>
                 {thisCase.description}
-                <h3>Case Status</h3>
+                <h3>Case Status:</h3>
+                {thisCase.status}
+
+                <h3>Case Priority:</h3>
+                {thisCase.priority}
 
                 {/* <tr key={thisCase.id}>
                 <td></td>
@@ -74,17 +76,36 @@ function CurrentCase() {
                 <td>{thisCase.status}</td>
             </tr> */}
 
-                <button onClick={handleDeleteClick}>
-                    <span role="img" aria-label="delete">
-                        🗑
-                    </span>
-                </button>
 
-                <button onClick={handleTakeCase}>
-                    <span role="img" aria-label="take">
-                        Claim
-                    </span>
-                </button>
+                {thisCase.assigned ? (
+                    <div>
+                        <br></br>
+                        <button onClick={handleDeleteClick}>
+                            <span role="img" aria-label="delete">
+                                🗑
+                            </span>
+                        </button>
+
+                        <button onClick={() => setIsEditing((isEditing) => !isEditing)}>
+                            <span role="img" aria-label="edit">
+                                ✏️
+                            </span>
+                        </button>
+                    </div>) :
+                    
+                    <button onClick={handleTakeCase}>
+                        <span role="img" aria-label="take">
+                            Claim
+                        </span>
+                    </button>
+                }
+
+                {isEditing ? (
+                    <EditCase thisCase={thisCase} setIsEditing={setIsEditing}
+
+                    />
+                ) : (null
+                )}
 
             </>
         )
