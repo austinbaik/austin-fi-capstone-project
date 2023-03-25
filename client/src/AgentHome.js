@@ -21,6 +21,19 @@ function AgentHome() {
     }, []);
 
 
+      useEffect(() => {
+    console.log("agent in useEffect", agent);
+
+    fetch("/me").then((r) => {
+      if (r.ok) {
+        r.json().then((agent) => setAgent(agent));
+      } else (
+        console.log("no user")
+      )
+    });
+  }, []);
+
+
     if (agent) {
 
         return (

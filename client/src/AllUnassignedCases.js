@@ -15,12 +15,12 @@ function AllUnassignedCases() {
     console.log(cases)
     // .filter through the 'cases' array for unassigned cases -> maps through that array. 
 
-    let unassCases = [] //map through this array 
+    let unassCases = cases.filter(unass => (unass.assigned === false)) //map through this array 
 
-    if (cases) {
+    if (unassCases) {
     return (
         <table>
-            <thead>
+            <thead align="left">
                 <tr>
                     <th>Title</th>
                     <th>Description</th>
@@ -29,7 +29,7 @@ function AllUnassignedCases() {
                 </tr>
             </thead>
             <tbody>
-                {cases.map(c => {
+                {unassCases.map(c => {
                     return (
                         <Link to={'/currentcase/' + c.id} >
                         <tr key={c.id}>
@@ -38,6 +38,8 @@ function AllUnassignedCases() {
                             <td>{c.priority}</td>
                             <td>{c.status}</td>
                         </tr>
+                        <br></br>
+
                     </Link>
             );
                 })}
@@ -46,7 +48,7 @@ function AllUnassignedCases() {
 
     )} else {
         return(
-        <div> Loading... </div>
+        <div> The Queue is Empty! </div>
         )
     }
 }

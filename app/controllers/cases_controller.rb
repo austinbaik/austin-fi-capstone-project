@@ -4,6 +4,16 @@ class CasesController < ApplicationController
     render json: cases
   end
 
+  # def create 
+
+  #   new_case = Case.create(assigned: false, )
+
+
+  # end 
+
+
+
+
   # also need to authenticate!
   def destroy
     find_case = Case.find(params[:id])

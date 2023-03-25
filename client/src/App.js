@@ -17,19 +17,21 @@ import AllClosedCases from "./AllClosedCases.js";
 function App() {
 
   const [agent, setAgent] = useContext(AgentContext)
-  // const [agent, setAgent] = useState();
 
+  console.log("agent state in App.js", agent);
 
-  // auto-login:
-  useEffect(() => {
-    fetch("/me").then((r) => {
-      if (r.ok) {
-        r.json().then((agent) => setAgent(agent));
-      } else (
-        console.log("no user")
-      )
-    });
-  }, []);
+  // // auto-login:
+  // useEffect(() => {
+  //   console.log("agent in useEffect", agent);
+
+  //   fetch("/me").then((r) => {
+  //     if (r.ok) {
+  //       r.json().then((agent) => setAgent(agent));
+  //     } else (
+  //       console.log("no user")
+  //     )
+  //   });
+  // }, []);
 
 
 
@@ -42,7 +44,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Landing agent={agent} />} />
           <Route path="/signup" element={<SignUp setAgent={setAgent} />} />
-          <Route path="/login" element={<Login setAgent={setAgent} />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/home" element={<AgentHome agent={agent} />} />
           <Route path="/newcase" element={<NewCase/>} />
           <Route path="/currentcase/:id" element={<CurrentCase/>} />

@@ -7,3 +7,10 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
+
+# users = User.create([ {name: 'Luke'}, {name: 'James'}, {name: 'Josh'}])
+
+Case.create(title: 'Lukes support case', description: "this is lukes test case", priority: "P1", status: "NEW", user_id: 5, assigned: false)
+
+Case.create(title: 'Joshs support case', description: "this is joshs test case", priority: "P2", status: "NEW", user_id: 7, assigned: false)
+

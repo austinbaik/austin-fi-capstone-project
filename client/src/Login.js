@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 // import Error from './Error.js'
+import { AgentContext } from "./context/agent.js"
 
 
-function Login({ setAgent }) {
+function Login() {
+  const [agent, setAgent] = useContext(AgentContext)
+  console.log("agent at login", agent)
+  
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -22,21 +26,11 @@ function Login({ setAgent }) {
         r.json().then((agent) => setAgent(agent))
           .then(navigate("/home"));
       } else {
-       r.json().then((err) => setErrors(err))
+        r.json().then((err) => setErrors(err))
       }
-
-
     });
   }
 
-  //   function link(){
-
-  //     return(
-  //     <Link to={'/alltoilets'} >
-  //     <h2> Discover Other Toilets </h2>
-  //     </Link>
-  // )
-  //   }
 
   return (
     <div align="center">
@@ -59,7 +53,7 @@ function Login({ setAgent }) {
           onChange={(e) => setPassword(e.target.value)}
         />
         <button type="submit">Login</button>
-{/* 
+        {/* 
         <div>
           
           <errors>{errors.error}</errors>

@@ -20,6 +20,7 @@ class AgentsController < ApplicationController
       def show
 
         agent = Agent.find_by(id: session[:user_id])
+        
         if agent
           render json: agent
         else

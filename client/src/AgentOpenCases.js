@@ -20,7 +20,7 @@ function AgentOpenCases() {
         return (
             <>
                 <table>
-                    <thead>
+                    <thead align='left'>
                         <tr>
                             <th>Title</th>
                             <th>Description</th>
@@ -28,9 +28,10 @@ function AgentOpenCases() {
                             <th>Status</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody align='left'>
                         {cases.map(c => {
                             return (
+                                
                                 <Link to={'/currentcase/' + c.id} >
                                     <tr key={c.id}>
                                         <td>{c.title}</td>
@@ -38,7 +39,10 @@ function AgentOpenCases() {
                                         <td>{c.priority}</td>
                                         <td>{c.status}</td>
                                     </tr>
+                                    <br></br>
                                 </Link>
+                                
+                                
                             );
                         })}
                     </tbody>

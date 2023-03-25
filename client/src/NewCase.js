@@ -27,7 +27,7 @@ function NewCase() {
                 description,
                 priority,
                 status,
-                user_id: customer
+                user_id: 7
             }),
         }).then((r) => {
             if (r.ok) {

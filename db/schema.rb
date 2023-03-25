@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_21_212647) do
+ActiveRecord::Schema.define(version: 2023_03_25_155156) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "agent_cases", force: :cascade do |t|
+    t.integer "agent_id"
+    t.integer "case_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "agents", force: :cascade do |t|
     t.string "name"
@@ -30,14 +37,14 @@ ActiveRecord::Schema.define(version: 2023_03_21_212647) do
     t.string "status"
     t.integer "rating"
     t.integer "user_id"
-    t.integer "agent_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "assigned"
   end
 
   create_table "comments", force: :cascade do |t|
     t.string "comment"
-    t.string "case_id"
+    t.integer "case_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "creator_name"

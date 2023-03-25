@@ -23,7 +23,6 @@ function CurrentCase() {
     console.log("thisCase", thisCase)
 
 
-
     const handleDeleteClick = (e) => {
         e.preventDefault();
         fetch(`/cases/${thisCase.id}`, {
@@ -38,38 +37,63 @@ function CurrentCase() {
         )
     }
 
+    const handleTakeCase = (e) => {
+        e.preventDefault();
+        fetch("/agent_cases/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ id }),
+            }).then((r) => {
+            if (r.ok) {
+                r.json().then((cases) => setCases(cases))
+            } else {
+                r.json().then((err) => console.log(err))
+            }
+        }
+        )
+    }
 
-    return (
-        <>
+    if (thisCase) {
+        return (
+            <>
+                <h1>Open Case</h1>
 
-            <h1>Open Case</h1>
 
-            Case Title
-            {thisCase.title}
-            Case Description
+                <h2>Case Title</h2>
+                {thisCase.title}
+                <h3>Case Description</h3>
+                {thisCase.description}
+                <h3>Case Status</h3>
 
-            Case Status
-
-            Case
-
-            {/* <tr key={thisCase.id}>
+                {/* <tr key={thisCase.id}>
                 <td></td>
                 <td>{thisCase.description}</td>
                 <td>{thisCase.priority}</td>
                 <td>{thisCase.status}</td>
             </tr> */}
 
-            <button onClick={handleDeleteClick}>
-                <span role="img" aria-label="delete">
-                    🗑
-                </span>
-            </button>
+                <button onClick={handleDeleteClick}>
+                    <span role="img" aria-label="delete">
+                        🗑
+                    </span>
+                </button>
 
-        </>
+                <button onClick={handleTakeCase}>
+                    <span role="img" aria-label="take">
+                        Claim
+                    </span>
+                </button>
 
+            </>
+        )
+    } else {
+        return (
+            <div> Loading... </div>
+        )
+    }
 
-
-    )
 }
 
 export default CurrentCase;
