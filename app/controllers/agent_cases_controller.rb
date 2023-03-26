@@ -23,6 +23,13 @@ class AgentCasesController < ApplicationController
 
   end
 
+  def index
+    agent = Agent.find_by(id: session[:user_id])
+    cases = agent.agent_cases
+
+    render json: cases
+  end
+
   private
 
   def parameters

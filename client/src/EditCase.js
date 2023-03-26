@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { CaseContext } from "./context/CaseContext";
 import {
     useParams
@@ -15,7 +15,8 @@ function EditCase({ thisCase, setIsEditing }) {
     const [description, setDescription] = useState(thisCase.description);
     const [priority, setPriority] = useState(thisCase.priority);
     const [status, setStatus] = useState(thisCase.status);
-    const [customer, setCustomer] = useState(""); //change to agent! //nesteed assocation in the serializer 
+    const [AgentChange, setAgentChange] = useState() // AgentChange = agent's Id 
+    const [agentList, setAgentList] = useState([])
 
     const statuses = ["NEW", "ACTIVE", "CLOSED"]
     const priorities = ["P0", "P1", "P2"]
@@ -23,30 +24,44 @@ function EditCase({ thisCase, setIsEditing }) {
     const customers = ["austin", "john"]
 
 
+    //Fetches ALL agent objects, returns agent objects as an array  
+    useEffect(() => {
+
+        fetch("/agents").then((r) => {
+            if (r.ok) {
+                r.json().then((agent) => setAgentList(agent));
+            } else (
+                console.log("no user")
+            )
+        });
+    }, []);
+
+    console.log("array agents", agentList);
+    console.log("AgentChange", AgentChange);
+
+
     function handleSubmit(e) {
         e.preventDefault();
-        // fetch(`/cases/${thisCase.id}/`, {
-        //     method: "PATCH",
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //     },
-        //     body: JSON.stringify({
-
-        //         title: title,
-        //         description: description,
-        //         priority: priority, 
-        //         status: status, 
-        // 
-
-        //     }),
-        // }).then((r) => {
-        //     if (r.ok) {
-        //         r.json().then((cases) => setCases(cases)
-        //     }
+        fetch(`/cases/${thisCase.id}/`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                id: thisCase.id, 
+                title: title,
+                description: description,
+                priority: priority,
+                status: status,
+            }),
+        }).then((r) => {
+            if (r.ok) {
+                r.json().then((cases) => setCases(cases))
+            } else { console.log(r.errors) }
 
             setIsEditing(false)
-        // }
-        // )
+        }
+        )
     }
 
 
@@ -95,14 +110,14 @@ function EditCase({ thisCase, setIsEditing }) {
                     })}
                 </select >
 
-                <label htmlFor="customer">customer</label>
+                <label htmlFor="agents">Change Agent</label>
                 <select
                     id="dropdown"
-                    onChange={(e) => setCustomer(e.target.value)}
+                    onChange={(e) => setAgentChange(e.target.value)}
                 >
-                    {customers.map(c => {
+                    {agentList.map(a => {
                         return (
-                            <option value={c}> {c} </option>
+                            <option value={a.id}> {a.name} </option>
                         );
                     })}
                 </select >
@@ -118,13 +133,7 @@ function EditCase({ thisCase, setIsEditing }) {
             </form>
         </div>
 
-
-
-
     )
-
-
-
 }
 
 

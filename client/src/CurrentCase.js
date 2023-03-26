@@ -5,7 +5,7 @@ import {
     useParams
 } from "react-router-dom";
 import EditCase from "./EditCase";
-
+import NewComment from "./NewComment";
 //need to be able to EDIT and DELETE this case (CRUD) 
 // NEED TO MAP ALL THE COMMENTS!!!! 
 
@@ -37,6 +37,8 @@ function CurrentCase() {
         )
     }
 
+
+
     const handleTakeCase = (e) => {
         e.preventDefault();
         fetch("/agent_cases/", {
@@ -65,7 +67,6 @@ function CurrentCase() {
                 {thisCase.description}
                 <h3>Case Status:</h3>
                 {thisCase.status}
-
                 <h3>Case Priority:</h3>
                 {thisCase.priority}
 
@@ -92,7 +93,7 @@ function CurrentCase() {
                             </span>
                         </button>
                     </div>) :
-                    
+
                     <button onClick={handleTakeCase}>
                         <span role="img" aria-label="take">
                             Claim
@@ -106,6 +107,14 @@ function CurrentCase() {
                     />
                 ) : (null
                 )}
+
+                <h3> Case Comments: </h3>
+
+                {/* add CaseComments.js + maps in order */}
+
+                <h3> Add Comment: </h3>
+                <NewComment caseId={id}/>
+
 
             </>
         )

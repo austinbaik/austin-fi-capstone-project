@@ -4,15 +4,22 @@ class CasesController < ApplicationController
     render json: cases
   end
 
-  # def create 
+  # def create
 
   #   new_case = Case.create(assigned: false, )
 
+  # end
 
-  # end 
+  # def update
 
+  #   agent = Agent.find(session[:user_id])
+  #   update_case = Case.find(params[:id])
+  #   agent_case = update_case.agent_cases
+  #   update_case.update(
 
+  #   )
 
+  # end
 
   # also need to authenticate!
   def destroy
@@ -22,4 +29,14 @@ class CasesController < ApplicationController
     cases = Case.all
     render json: cases, status: :ok
   end
+
+
+  private 
+
+  def edit_params 
+    params.permit(:id, :title, :description, :priority, :status)
+
+  end 
+
+
 end
