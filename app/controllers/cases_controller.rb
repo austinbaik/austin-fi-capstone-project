@@ -10,16 +10,26 @@ class CasesController < ApplicationController
 
   # end
 
-  # def update
+  def update
 
-  #   agent = Agent.find(session[:user_id])
-  #   update_case = Case.find(params[:id])
-  #   agent_case = update_case.agent_cases
+  #  SENDS TWO PARAMS WITH AGENT IDS (INITIAL AND NEW)
+
+    agent = Agent.find(session[:user_id])
+    update_case = Case.find(params[:id])
+    agent_case = AgentCase.find_by(agent_id: agent.id, case_id: params[:id] )
+    
+    # EVERYTHING ABOUT IS WORKING NOW
+
+  # agent_case.agent.id = params[:new_agent]
+  # update_case.agent_cases
   #   update_case.update(
-
+    # title: title,
+    # description: description,
+    # priority: priority,
+    # status: status,    
   #   )
 
-  # end
+  end
 
   # also need to authenticate!
   def destroy
@@ -30,13 +40,9 @@ class CasesController < ApplicationController
     render json: cases, status: :ok
   end
 
+  private
 
-  private 
-
-  def edit_params 
-    params.permit(:id, :title, :description, :priority, :status)
-
-  end 
-
-
+  def edit_params
+    params.permit(:id, :title, :description, :priority, :status, :case_id, :new_agent)
+  end
 end

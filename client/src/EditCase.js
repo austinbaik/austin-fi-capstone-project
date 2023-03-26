@@ -53,6 +53,7 @@ function EditCase({ thisCase, setIsEditing }) {
                 description: description,
                 priority: priority,
                 status: status,
+                new_agent: AgentChange
             }),
         }).then((r) => {
             if (r.ok) {

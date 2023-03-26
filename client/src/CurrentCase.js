@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import EditCase from "./EditCase";
 import NewComment from "./NewComment";
+import CommentCard from "./CommentCard";
 //need to be able to EDIT and DELETE this case (CRUD) 
 // NEED TO MAP ALL THE COMMENTS!!!! 
 
@@ -109,11 +110,11 @@ function CurrentCase() {
                 )}
 
                 <h3> Case Comments: </h3>
-
+                <CommentCard comments={thisCase.comments} />
                 {/* add CaseComments.js + maps in order */}
 
                 <h3> Add Comment: </h3>
-                <NewComment caseId={id}/>
+                <NewComment caseId={id} />
 
 
             </>
