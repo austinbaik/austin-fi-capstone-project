@@ -4,7 +4,7 @@ import {
 } from "react-router-dom";
 import { CaseContext } from "./context/CaseContext";
 import { AgentContext } from "./context/agent";
-
+import "./Table.css";
 //component lists the cases assigned to the agent 
 // import CurrentCase from "./CurrentCase";
 
@@ -22,20 +22,20 @@ function AgentOpenCases() {
     console.log("agent in aoc", agent.id)
     // let myCases = cases.filter(c => c.agent_cases == agent.id)
     // console.log("myCases", myCases)
-        
 
-    
+
+
 
 
     if (cases) {
 
-       let myCases = cases.filter(c => c.agent_cases == agent.id);
+        let myCases = cases.filter(c => c.agent_cases == agent.id);
         console.log("myCases", myCases)
-        
+
         return (
             <>
-                <table>
-                    <thead align='left'>
+                <table class="styled-table">
+                    <thead>
                         <tr>
                             <th >Title</th>
                             <th >Description</th>
@@ -43,12 +43,29 @@ function AgentOpenCases() {
                             <th >Status</th>
                         </tr>
                     </thead>
-                    <tbody align='left'>
+                    <tbody>
+
                         {myCases.map(c => {
                             return (
+                                <tr key={c.id} class="active-row">
+                                    <Link to={'/currentcase/' + c.id}  >
+                                        <td>{c.title}</td>
+                                    </Link>
+                                    <td>{c.description}</td>
+                                    <td>{c.priority}</td>
+                                    <td>{c.status}</td>
+                                </tr>
+
+
+
+                            );
+                        })}
+
+                        {/* {myCases.map(c => {
+                            return (
                                 
-                                <Link to={'/currentcase/' + c.id} >
-                                    <tr key={c.id}>
+                                <Link to={'/currentcase/' + c.id}  >
+                                    <tr key={c.id} >
                                         <td>{c.title}</td>
                                         <td>{c.description}</td>
                                         <td>{c.priority}</td>
@@ -59,7 +76,7 @@ function AgentOpenCases() {
                                 
                                 
                             );
-                        })}
+                        })} */}
                     </tbody>
                 </table>
             </>
