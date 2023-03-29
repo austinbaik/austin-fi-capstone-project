@@ -21,7 +21,6 @@ function EditCase({ thisCase, setIsEditing }) {
     const statuses = ["NEW", "ACTIVE", "CLOSED"]
     const priorities = ["P0", "P1", "P2"]
 
-    const customers = ["austin", "john"]
 
 
     //Fetches ALL agent objects, returns agent objects as an array  

@@ -10,7 +10,7 @@ import CommentCard from "./CommentCard";
 //need to be able to EDIT and DELETE this case (CRUD) 
 // NEED TO MAP ALL THE COMMENTS!!!! 
 
-function CurrentCase() {
+function CurrentCase( ) {
 
     let { id } = useParams();
     //take the id and match to the object from context and render 
@@ -20,8 +20,16 @@ function CurrentCase() {
     console.log("id", id)
     console.log("cases", cases)
 
+    // useEffect(() => {
+
+        
+    // }, []);
+
     const thisCase = cases.find(c => c.id == id)
     console.log("thisCase", thisCase)
+
+    // console.log("currentCase", currentCase)
+
 
 
     const handleDeleteClick = (e) => {
@@ -37,8 +45,6 @@ function CurrentCase() {
         }
         )
     }
-
-
 
     const handleTakeCase = (e) => {
         e.preventDefault();

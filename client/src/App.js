@@ -47,7 +47,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/home" element={<AgentHome agent={agent} />} />
           <Route path="/newcase" element={<NewCase/>} />
-          <Route path="/currentcase/:id" element={<CurrentCase/>} />
+          <Route path="/currentcase/:id" element={<CurrentCase />} />
           <Route path="/allclosedcases" element={<AllClosedCases/>} />
         </Routes>
 

@@ -1,5 +1,8 @@
 class AgentCasesController < ApplicationController
+
+
   def create
+    #check if agent cases exists? 
     agent = Agent.find_by(id: session[:user_id])
     thisCase = Case.find(params[:id])
 
@@ -7,7 +10,7 @@ class AgentCasesController < ApplicationController
       agent_case = AgentCase.create(case_id: thisCase.id, agent_id: agent.id)
     end
 
-    if agent_case
+    if agent_case.valid?
       thisCase.assigned = true
     end
 
