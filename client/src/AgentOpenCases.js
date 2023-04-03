@@ -29,6 +29,7 @@ function AgentOpenCases() {
 
     if (cases) {
 
+        console.log("cases", cases)
         let myCases = cases.filter(c => c.agent_cases == agent.id);
         console.log("myCases", myCases)
 

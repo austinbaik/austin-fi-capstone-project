@@ -19,7 +19,7 @@ function AllUnassignedCases() {
     if (cases) {
 
 
-        let unassCases = cases.filter(unass => (unass.assigned === false))
+        let unassCases = cases.filter(unass => (unass.assigned != true))
 
         return (
             <>

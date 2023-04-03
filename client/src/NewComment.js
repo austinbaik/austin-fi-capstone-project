@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { CaseContext } from "./context/CaseContext";
 
 
 function NewComment( {caseId} ) {
@@ -11,6 +12,7 @@ function NewComment( {caseId} ) {
 
     const navigate = useNavigate();
     const [comment, setComment] = useState("");
+    const [cases, setCases] = useContext(CaseContext)
 
     console.log(caseId)
 
@@ -30,7 +32,7 @@ function NewComment( {caseId} ) {
             }),
         }).then((r) => {
             if (r.ok) {
-                r.json().then((comment) => console.log("comment", comment))
+                r.json().then((r) => setCases(r))
                     // .then(navigate("/home"))
             } else {
                 r.json().then((err) => console.log(err.errors))

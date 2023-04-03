@@ -1,5 +1,5 @@
 class CaseSerializer < ActiveModel::Serializer
-  attributes :id, :title, :description, :priority, :status, :assigned, :user_id, :comments, :agent_cases
+  attributes :id, :title, :description, :priority, :status, :assigned, :user_id, :comments, :agent_cases, :user
 
   def agent_cases
     

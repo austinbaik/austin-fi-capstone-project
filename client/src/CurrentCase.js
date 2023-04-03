@@ -10,7 +10,7 @@ import CommentCard from "./CommentCard";
 //need to be able to EDIT and DELETE this case (CRUD) 
 // NEED TO MAP ALL THE COMMENTS!!!! 
 
-function CurrentCase( ) {
+function CurrentCase() {
 
     let { id } = useParams();
     //take the id and match to the object from context and render 
@@ -21,30 +21,7 @@ function CurrentCase( ) {
     console.log("cases", cases)
 
     // useEffect(() => {
-
-        
     // }, []);
-
-    const thisCase = cases.find(c => c.id == id)
-    console.log("thisCase", thisCase)
-
-    // console.log("currentCase", currentCase)
-
-
-
-    const handleDeleteClick = (e) => {
-        e.preventDefault();
-        fetch(`/cases/${thisCase.id}`, {
-            method: "DELETE"
-        }).then((r) => {
-            if (r.ok) {
-                r.json().then((cases) => setCases(cases, "delete"))
-            } else {
-                r.json().then((err) => console.log(err))
-            }
-        }
-        )
-    }
 
     const handleTakeCase = (e) => {
         e.preventDefault();
@@ -64,7 +41,28 @@ function CurrentCase( ) {
         )
     }
 
-    if (thisCase) {
+    
+    if (cases) {
+        const thisCase = cases.find(c => c.id == id)
+        console.log("thisCase", thisCase)
+        console.log("assigned?", thisCase.assigned)
+
+
+        const handleDeleteClick = (e) => {
+            e.preventDefault();
+            fetch(`/cases/${thisCase.id}`, {
+                method: "DELETE"
+            }).then((r) => {
+                if (r.ok) {
+                    r.json().then((cases) => setCases(cases, "delete"))
+                } else {
+                    r.json().then((err) => console.log(err))
+                }
+            }
+            )
+        }
+
+
         return (
             <>
                 <h1>{thisCase.title}</h1>
@@ -84,7 +82,22 @@ function CurrentCase( ) {
                 <td>{thisCase.status}</td>
             </tr> */}
 
+                <br></br>
 
+                {isEditing ? (
+                    <EditCase thisCase={thisCase} setIsEditing={setIsEditing}
+
+                    />
+                ) : (null
+                )}
+
+                <h3> Case Comments: </h3>
+                <CommentCard comments={thisCase.comments} />
+                {/* add CaseComments.js + maps in order */}
+
+                <h3> Add Comment: </h3>
+                <NewComment caseId={id} />
+                
                 {thisCase.assigned ? (
                     <div>
                         <br></br>
@@ -107,21 +120,6 @@ function CurrentCase( ) {
                         </span>
                     </button>
                 }
-
-                {isEditing ? (
-                    <EditCase thisCase={thisCase} setIsEditing={setIsEditing}
-
-                    />
-                ) : (null
-                )}
-
-                <h3> Case Comments: </h3>
-                <CommentCard comments={thisCase.comments} />
-                {/* add CaseComments.js + maps in order */}
-
-                <h3> Add Comment: </h3>
-                <NewComment caseId={id} />
-
 
             </>
         )

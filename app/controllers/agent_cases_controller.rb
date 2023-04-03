@@ -6,12 +6,20 @@ class AgentCasesController < ApplicationController
     agent = Agent.find_by(id: session[:user_id])
     thisCase = Case.find(params[:id])
 
+
+    
     if agent && thisCase
+
+    # agent_case = AgentCase.find_by(agent_id: params[agentID], case_id: params[caseid])
+
+    # if agent_case.valid? 
+
       agent_case = AgentCase.create(case_id: thisCase.id, agent_id: agent.id)
     end
 
     if agent_case.valid?
       thisCase.assigned = true
+      thisCase.save
     end
 
     cases = Case.all

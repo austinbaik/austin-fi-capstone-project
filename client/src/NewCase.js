@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
+import { CaseContext } from "./context/CaseContext"; 
+import "./App.css";
 
 function NewCase() {
 
@@ -10,6 +11,7 @@ function NewCase() {
     const [priority, setPriority] = useState("");
     const [status, setStatus] = useState("");
     const [customer, setCustomer] = useState("");
+    const [cases, setCases] = useContext(CaseContext)
 
     const statuses = ["NEW", "ACTIVE", "CLOSED"]
     const priorities = ["P0", "P1", "P2"]
@@ -31,7 +33,7 @@ function NewCase() {
             }),
         }).then((r) => {
             if (r.ok) {
-                r.json().then((newCase) => console.log("newCase", newCase))
+                r.json().then((s) => console.log("s", s))
                     .then(navigate("/home"))
             } else {
                 r.json().then((err) => console.log(err.errors))
@@ -41,14 +43,28 @@ function NewCase() {
 
 
     //call useEffect to only get the customer information! 
-    const customers = ["austin", "john", "bob"]
+    // const customers = ["austin", "john", "bob"]
     // const [customers, setCustomers] = useState([]);
+        //map through this to call up the customer names 
+
+    if (cases) {
+
+        const customerList = cases.map(c => c.user)  
+        console.log(customerList) 
+        
 
 
-    return (
+        let uniqueObjArray = [...new Map(customerList.map((item) => [item["id"], item])).values()];
+
+
+        console.log(uniqueObjArray) 
+
+
+              return (
+
 
         <div >
-            <form align='center' onSubmit={handleSubmit}>
+            <form align='center' onSubmit={handleSubmit} class="form">
                 <label htmlFor="title">Title</label>
                 <input
                     type="text"
@@ -57,7 +73,6 @@ function NewCase() {
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                 />
-                <br></br>
                 <label htmlFor="description">Description</label>
                 <input
                     type="text"
@@ -67,7 +82,7 @@ function NewCase() {
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                 />
-                <label htmlFor="priority">priority</label>
+                <label htmlFor="priority">Priority</label>
                 <select
                     id="dropdown"
                     onChange={(e) => setPriority(e.target.value)}
@@ -78,7 +93,7 @@ function NewCase() {
                         );
                     })}
                 </select >
-                <label htmlFor="status">status</label>
+                <label htmlFor="status">Status</label>
                 <select
                     id="dropdown"
                     onChange={(e) => setStatus(e.target.value)}
@@ -90,14 +105,14 @@ function NewCase() {
                     })}
                 </select >
 
-                <label htmlFor="customer">customer</label>
+                <label htmlFor="customer">Customer</label>
                 <select
                     id="dropdown"
                     onChange={(e) => setCustomer(e.target.value)}
                 >
-                    {customers.map(c => {
+                    {uniqueObjArray.map(c => {
                         return (
-                            <option value={c}> {c} </option>
+                            <option value={c.id}> {c.name} </option>
                         );
                     })}
                 </select >
@@ -113,7 +128,13 @@ function NewCase() {
             </form>
         </div>
     )
+}else {
+    return(
+        <div>
+            Loading...
+        </div>
+    )
 }
-
+} 
 
 export default NewCase;

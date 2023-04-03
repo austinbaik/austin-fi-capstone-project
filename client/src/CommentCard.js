@@ -20,20 +20,18 @@ function CommentCard( {comments} ) {
 
         <div> 
 
-            {comments.map(c => {
+            {comments.map(c => { console.log(c)
                 return (
-                    <div key={c.id}>
-                        {c.comment}
-                        
-                    </div>
+                    <form key={c.id}>
+                         {c.creator_name} says: 
+                         <br></br>
+                         {c.comment}
+                        {c.created_at}
+                       
+
+                    </form>
                 )
             })}
-
-
-
-"testing... "
-
-
 
         </div>
 
