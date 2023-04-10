@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ErrorModal from "./ErrorModal";
 // import Error from './Error.js'
 
 function SignUp({ setAgent }) {
@@ -9,7 +10,7 @@ function SignUp({ setAgent }) {
 
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState();
 
   console.log(errors);
 
@@ -36,8 +37,16 @@ function SignUp({ setAgent }) {
     });
   }
 
+  const errorHandler = () => {
+    setErrors()
+  }
+
+
   return (
+    
     <div>
+      { errors && <ErrorModal  message={errors} onClose={errorHandler} /> } 
+
       <form onSubmit={handleSubmit}>
         <h2>Sign Up</h2>
         <label htmlFor="name">Name</label>

@@ -10,7 +10,6 @@ import "./Table.css";
 
 function AgentOpenCases() {
 
-
     const [cases, setCases] = useContext(CaseContext)
     const [agent, setAgent] = useContext(AgentContext)
     // const [agentCases, setAgentCases] = useState([])
@@ -24,13 +23,10 @@ function AgentOpenCases() {
     // console.log("myCases", myCases)
 
 
-
-
-
     if (cases) {
 
         console.log("cases", cases)
-        let myCases = cases.filter(c => c.agent_cases == agent.id);
+        let myCases = cases.filter(c => c.agent_cases == agent.id && c.status !== "CLOSED");
         console.log("myCases", myCases)
 
         return (
@@ -45,7 +41,6 @@ function AgentOpenCases() {
                         </tr>
                     </thead>
                     <tbody>
-
                         {myCases.map(c => {
                             return (
                                 <tr key={c.id} class="active-row">
@@ -61,23 +56,6 @@ function AgentOpenCases() {
 
                             );
                         })}
-
-                        {/* {myCases.map(c => {
-                            return (
-                                
-                                <Link to={'/currentcase/' + c.id}  >
-                                    <tr key={c.id} >
-                                        <td>{c.title}</td>
-                                        <td>{c.description}</td>
-                                        <td>{c.priority}</td>
-                                        <td>{c.status}</td>
-                                    </tr>
-                                    <br></br>
-                                </Link>
-                                
-                                
-                            );
-                        })} */}
                     </tbody>
                 </table>
             </>

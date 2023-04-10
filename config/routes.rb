@@ -21,8 +21,12 @@ Rails.application.routes.draw do
 
   post "/cases/:case_id/comments", to: "comments#create"
 
+  get "/cases/:id", to: "cases#show"
+
 
   delete "/logout", to: "sessions#destroy"
+
+  get "/allclosedcases", to: "cases#closed_cases"
 
   get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
 end

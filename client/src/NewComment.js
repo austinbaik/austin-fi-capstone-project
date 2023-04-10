@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { CaseContext } from "./context/CaseContext";
 
 
-function NewComment( {caseId} ) {
+function NewComment( {caseId, setThisCase} ) {
 
     // t.string "comment"
     // t.integer "case_id"
@@ -15,7 +15,6 @@ function NewComment( {caseId} ) {
     const [cases, setCases] = useContext(CaseContext)
 
     console.log(caseId)
-
 
     //useEffect to async call the comments? 
 
@@ -32,7 +31,8 @@ function NewComment( {caseId} ) {
             }),
         }).then((r) => {
             if (r.ok) {
-                r.json().then((r) => setCases(r))
+                r.json().then((r) => setThisCase(r))
+                setComment("")
                     // .then(navigate("/home"))
             } else {
                 r.json().then((err) => console.log(err.errors))

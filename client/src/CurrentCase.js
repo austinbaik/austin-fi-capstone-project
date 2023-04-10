@@ -1,14 +1,13 @@
-
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { CaseContext } from "./context/CaseContext";
 import {
-    useParams
+    useParams,
+    useNavigate
 } from "react-router-dom";
 import EditCase from "./EditCase";
 import NewComment from "./NewComment";
 import CommentCard from "./CommentCard";
-//need to be able to EDIT and DELETE this case (CRUD) 
-// NEED TO MAP ALL THE COMMENTS!!!! 
+
 
 function CurrentCase() {
 
@@ -16,12 +15,37 @@ function CurrentCase() {
     //take the id and match to the object from context and render 
     const [cases, setCases] = useContext(CaseContext)
     const [isEditing, setIsEditing] = useState(false);
+    const navigate = useNavigate();
 
-    console.log("id", id)
-    console.log("cases", cases)
+    const [thisCase, setThisCase] = useState({
+        title: "",
+        user: { name: "" },
+        description: "",
+        status: "",
+        priority: "",
+        comments: [{
+            id: "",
+            created_at: "",
+            comment: "",
+            creator_name: ""
+        }],
+    })
 
-    // useEffect(() => {
-    // }, []);
+
+    useEffect(() => {
+
+        fetch(`/cases/${id}/`).then((r) => {
+            if (r.ok) {
+                r.json().then((thisCase) => setThisCase(thisCase))
+                    .then(console.log("r", thisCase))
+
+            } else {
+                console.log('errored')
+            }
+        })
+
+    }, [id]);
+
 
     const handleTakeCase = (e) => {
         e.preventDefault();
@@ -33,7 +57,11 @@ function CurrentCase() {
             body: JSON.stringify({ id }),
         }).then((r) => {
             if (r.ok) {
-                r.json().then((cases) => setCases(cases))
+                r.json().then((thisCase) => {
+                    setThisCase(thisCase)
+                    console.log(thisCase)
+                }
+                )
             } else {
                 r.json().then((err) => console.log(err))
             }
@@ -41,12 +69,11 @@ function CurrentCase() {
         )
     }
 
-    
-    if (cases) {
-        const thisCase = cases.find(c => c.id == id)
-        console.log("thisCase", thisCase)
-        console.log("assigned?", thisCase.assigned)
 
+    if (thisCase) {
+        // const thisCase = cases.find(c => c.id == id)
+        // console.log("thisCase", thisCase)
+        // console.log("assigned?", thisCase.assigned)
 
         const handleDeleteClick = (e) => {
             e.preventDefault();
@@ -55,6 +82,7 @@ function CurrentCase() {
             }).then((r) => {
                 if (r.ok) {
                     r.json().then((cases) => setCases(cases, "delete"))
+                        .then(navigate("/home"))
                 } else {
                     r.json().then((err) => console.log(err))
                 }
@@ -66,8 +94,8 @@ function CurrentCase() {
         return (
             <>
                 <h1>{thisCase.title}</h1>
-
-
+                <h3>Customer Name:</h3>
+                {thisCase.user.name}
                 <h3>Case Description:</h3>
                 {thisCase.description}
                 <h3>Case Status:</h3>
@@ -85,19 +113,13 @@ function CurrentCase() {
                 <br></br>
 
                 {isEditing ? (
-                    <EditCase thisCase={thisCase} setIsEditing={setIsEditing}
+                    <EditCase thisCase={thisCase} setIsEditing={setIsEditing} setThisCase={setThisCase}
 
                     />
                 ) : (null
                 )}
 
-                <h3> Case Comments: </h3>
-                <CommentCard comments={thisCase.comments} />
-                {/* add CaseComments.js + maps in order */}
 
-                <h3> Add Comment: </h3>
-                <NewComment caseId={id} />
-                
                 {thisCase.assigned ? (
                     <div>
                         <br></br>
@@ -120,7 +142,11 @@ function CurrentCase() {
                         </span>
                     </button>
                 }
+                <h3> Case Comments: </h3>
+                <CommentCard comments={thisCase.comments}  />
 
+                <h3> Add Comment: </h3>
+                <NewComment caseId={id} setThisCase={setThisCase} />
             </>
         )
     } else {

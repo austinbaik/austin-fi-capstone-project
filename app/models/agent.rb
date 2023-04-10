@@ -8,4 +8,8 @@ class Agent < ApplicationRecord
     has_many :comments, through: :cases 
     has_many :users, through: :cases 
 
+
+    validates :name, presence: true
+    validates :email, presence: true
+
 end

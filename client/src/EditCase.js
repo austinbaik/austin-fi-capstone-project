@@ -6,7 +6,7 @@ import {
 
 
 
-function EditCase({ thisCase, setIsEditing }) {
+function EditCase({ thisCase, setThisCase, setIsEditing }) {
 
 
     const [cases, setCases] = useContext(CaseContext)
@@ -21,7 +21,7 @@ function EditCase({ thisCase, setIsEditing }) {
     const statuses = ["NEW", "ACTIVE", "CLOSED"]
     const priorities = ["P0", "P1", "P2"]
 
-
+    console.log("p", priority)
 
     //Fetches ALL agent objects, returns agent objects as an array  
     useEffect(() => {
@@ -47,7 +47,7 @@ function EditCase({ thisCase, setIsEditing }) {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                id: thisCase.id, 
+                id: thisCase.id,
                 title: title,
                 description: description,
                 priority: priority,
@@ -56,12 +56,25 @@ function EditCase({ thisCase, setIsEditing }) {
             }),
         }).then((r) => {
             if (r.ok) {
-                r.json().then((cases) => setCases(cases))
+                r.json().then((updatedCase) => handleUpdate(updatedCase))
             } else { console.log(r.errors) }
 
             setIsEditing(false)
         }
         )
+    }
+
+    function handleUpdate(updatedCase) {
+        console.log("updatedCase", updatedCase)
+        setThisCase(updatedCase)
+        let updatedCases = cases.map(c => {
+            if (c.id === updatedCase.id) {
+                return updatedCase.id
+            } else {
+                return c
+            }
+        })
+        setCases(updatedCases)
     }
 
 
@@ -90,8 +103,10 @@ function EditCase({ thisCase, setIsEditing }) {
                 <label htmlFor="priority">priority</label>
                 <select
                     id="dropdown"
+
                     onChange={(e) => setPriority(e.target.value)}
                 >
+                    <option >Please select</option>
                     {priorities.map(p => {
                         return (
                             <option value={p}> {p} </option>
@@ -103,6 +118,9 @@ function EditCase({ thisCase, setIsEditing }) {
                     id="dropdown"
                     onChange={(e) => setStatus(e.target.value)}
                 >
+
+                    <option value="" selected>Please select</option>
+
                     {statuses.map(s => {
                         return (
                             <option value={s}> {s} </option>
@@ -115,6 +133,8 @@ function EditCase({ thisCase, setIsEditing }) {
                     id="dropdown"
                     onChange={(e) => setAgentChange(e.target.value)}
                 >
+                    <option value="" selected>Please select</option>
+
                     {agentList.map(a => {
                         return (
                             <option value={a.id}> {a.name} </option>

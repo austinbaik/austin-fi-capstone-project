@@ -23,10 +23,11 @@ function CommentCard( {comments} ) {
             {comments.map(c => { console.log(c)
                 return (
                     <form key={c.id}>
-                         {c.creator_name} says: 
+                        At {c.created_at}, <br>
+                        
+                        </br>{c.creator_name} said: 
                          <br></br>
                          {c.comment}
-                        {c.created_at}
                        
 
                     </form>

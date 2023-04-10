@@ -35,7 +35,6 @@ function AllUnassignedCases() {
                     <tbody>
                         {unassCases.map(c => {
                             return (
-
                                 <tr key={c.id} class="active-row">
                                     <Link to={'/currentcase/' + c.id} >
                                         <td>{c.title}</td>

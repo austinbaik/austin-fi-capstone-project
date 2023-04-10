@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
 
-    has_many :cases 
-    has_many :comments through: :case 
-
+    def index 
+        users = User.all 
+        render json: users, status: :ok
+    end 
 
 end

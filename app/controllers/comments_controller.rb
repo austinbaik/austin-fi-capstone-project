@@ -7,8 +7,8 @@ class CommentsController < ApplicationController
       this_case = Case.find_by(id: params[:case_id])
       this_case.comments.create(comment: params[:comment], is_agent: "true", creator_name: name)
 
-      cases = Case.all
-      render json: cases, status: :created
+      # cases = Case.all
+      render json: this_case, status: :created
     else
       render json: { errors: this_case.errors.full_messages }, status: :unprocessable_entity
     end
