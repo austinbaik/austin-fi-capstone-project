@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { CaseContext } from "./context/CaseContext";
+import ErrorModal from "./ErrorModal";
 
 
 function NewComment( {caseId, setThisCase} ) {
@@ -13,6 +14,7 @@ function NewComment( {caseId, setThisCase} ) {
     const navigate = useNavigate();
     const [comment, setComment] = useState("");
     const [cases, setCases] = useContext(CaseContext)
+    const [errors, setErrors] = useState();
 
     console.log(caseId)
 
@@ -35,14 +37,21 @@ function NewComment( {caseId, setThisCase} ) {
                 setComment("")
                     // .then(navigate("/home"))
             } else {
-                r.json().then((err) => console.log(err.errors))
+                r.json().then((err) => setErrors(err))
             }
         });
     }
-
+console.log("err", errors);
+    const errorHandler = () => {
+        setErrors()
+      }
+    
     return (
 
         <div >
+      { errors && <ErrorModal  message={errors} onClose={errorHandler} /> } 
+
+
             <form align='center' onSubmit={handleSubmit}>
                 <label htmlFor="comment">New Comment</label>
                 <input

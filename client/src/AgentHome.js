@@ -38,7 +38,8 @@ function AgentHome() {
 
         return (
 
-            <div>
+            <div style={{padding: "5px 50px 75px 100px"} }
+            >
 
                 <h2> My Open Cases: </h2>
                 <AgentOpenCases />

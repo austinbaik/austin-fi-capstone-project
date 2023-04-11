@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import Error from './Error.js'
-import { AgentContext } from "./context/agent.js"
+import { AgentContext } from "./context/agent.js"; 
+import ErrorModal from "./ErrorModal.js";
 
 
 function Login() {
@@ -12,6 +12,9 @@ function Login() {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
+  const errorHandler = () => {
+    setErrors()
+}
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -34,6 +37,9 @@ function Login() {
 
   return (
     <div align="center">
+                {errors && <ErrorModal message={errors} onClose={errorHandler} />}
+
+
       <form onSubmit={handleSubmit}>
         <h1>Login</h1>
         <label htmlFor="name">Name</label>

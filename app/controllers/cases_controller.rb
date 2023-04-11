@@ -1,32 +1,29 @@
-
 class CasesController < ApplicationController
   before_action :authorize
-
-
 
   def index
     cases = Case.all
     render json: cases
   end
 
-
-  def show 
-    this_case = Case.find_by(id: params[:id]) 
+  def show
+    this_case = Case.find_by(id: params[:id])
     render json: this_case, status: :ok
-  end 
+  end
 
   def closed_cases
     closed_cases = Case.where(status: "CLOSED").all
     render json: closed_cases, status: :ok
-  end 
+  end
 
-  
   def create
     new_case = Case.create(create_params)
-    # new_case.assigned = false 
-    # new_case.save  
-    cases = Case.all
-    render json: cases, status: :ok
+    # new_case.assigned = false
+    # new_case.save
+    if new_case.valid?
+      cases = Case.all
+      render json: cases, status: :ok
+    else render json: { errors: new_case.errors.full_messages }, status: :unprocessable_entity     end
   end
 
   def update
@@ -36,8 +33,10 @@ class CasesController < ApplicationController
     update_case = Case.find(params[:id])
     agent_case = AgentCase.find_by(agent_id: agent.id, case_id: params[:id])
 
-    if params[:new_agent] != nil  
- 
+    # normally would delete the association and create a new one; 
+    # wouldn't allow any of hte agents to change the agent 
+
+    if params[:new_agent] != nil
       agent_case.agent_id = (params[:new_agent])
       agent_case.save
       update_case.update(
@@ -59,8 +58,8 @@ class CasesController < ApplicationController
 
     # cases = Case.all
     render json: update_case, status: :ok
-  # else
-  #   render json: { errors: cases.errors.full_messages }, status: :unprocessable_entity
+    # else
+    #   render json: { errors: cases.errors.full_messages }, status: :unprocessable_entity
   end
 
   # also need to authenticate!
@@ -81,10 +80,8 @@ class CasesController < ApplicationController
   def create_params
     params.require(:case).permit(:title, :description, :priority, :status, :user_id, :assigned)
   end
-  
 
   def authorize
     return render json: { error: "Not authorized" }, status: :unauthorized unless session.include? :user_id
   end
-
 end

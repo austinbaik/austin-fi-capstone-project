@@ -7,6 +7,7 @@ import {
 import EditCase from "./EditCase";
 import NewComment from "./NewComment";
 import CommentCard from "./CommentCard";
+import ErrorModal from "./ErrorModal";
 
 
 function CurrentCase() {
@@ -16,6 +17,11 @@ function CurrentCase() {
     const [cases, setCases] = useContext(CaseContext)
     const [isEditing, setIsEditing] = useState(false);
     const navigate = useNavigate();
+    const [errors, setErrors] = useState();
+    const errorHandler = () => {
+        setErrors()
+    }
+
 
     const [thisCase, setThisCase] = useState({
         title: "",
@@ -63,7 +69,7 @@ function CurrentCase() {
                 }
                 )
             } else {
-                r.json().then((err) => console.log(err))
+                r.json().then((err) => setErrors(err))
             }
         }
         )
@@ -84,7 +90,7 @@ function CurrentCase() {
                     r.json().then((cases) => setCases(cases, "delete"))
                         .then(navigate("/home"))
                 } else {
-                    r.json().then((err) => console.log(err))
+                    r.json().then((err) => setErrors(err))
                 }
             }
             )
@@ -92,8 +98,33 @@ function CurrentCase() {
 
 
         return (
-            <>
+            < div 
+            style={{ padding: "5px 50px 75px 50px" }} >
+                                {errors && <ErrorModal message={errors} onClose={errorHandler} />}
+
                 <h1>{thisCase.title}</h1>
+                {thisCase.assigned ? (
+                    <div>
+                        <br></br>
+                        <button onClick={handleDeleteClick}>
+                            <span role="img" aria-label="delete">
+                                🗑
+                            </span>
+                        </button>
+
+                        <button onClick={() => setIsEditing((isEditing) => !isEditing)}>
+                            <span role="img" aria-label="edit">
+                                ✏️
+                            </span>
+                        </button>
+                    </div>) :
+
+                    <button onClick={handleTakeCase}>
+                        <span role="img" aria-label="take">
+                            Claim
+                        </span>
+                    </button>
+                }
                 <h3>Customer Name:</h3>
                 {thisCase.user.name}
                 <h3>Case Description:</h3>
@@ -120,34 +151,13 @@ function CurrentCase() {
                 )}
 
 
-                {thisCase.assigned ? (
-                    <div>
-                        <br></br>
-                        <button onClick={handleDeleteClick}>
-                            <span role="img" aria-label="delete">
-                                🗑
-                            </span>
-                        </button>
 
-                        <button onClick={() => setIsEditing((isEditing) => !isEditing)}>
-                            <span role="img" aria-label="edit">
-                                ✏️
-                            </span>
-                        </button>
-                    </div>) :
-
-                    <button onClick={handleTakeCase}>
-                        <span role="img" aria-label="take">
-                            Claim
-                        </span>
-                    </button>
-                }
                 <h3> Case Comments: </h3>
-                <CommentCard comments={thisCase.comments}  />
+                <CommentCard comments={thisCase.comments} />
 
                 <h3> Add Comment: </h3>
                 <NewComment caseId={id} setThisCase={setThisCase} />
-            </>
+            </div>
         )
     } else {
         return (

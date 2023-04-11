@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { CaseContext } from "./context/CaseContext";
 import "./App.css";
-
+import ErrorModal from "./ErrorModal";
 
 
 // **** PROBLEM: WILL ONLY GET THE USERS WITH ACTIVE CASES - WE ACTUALLY NEED TO DO AN API CALL TO GET ALL THE ACTIVE USERS **** 
@@ -16,13 +16,17 @@ function NewCase() {
     const [status, setStatus] = useState("NEW");
     const [customer, setCustomer] = useState("");
     const [cases, setCases] = useContext(CaseContext)
+    const [errors, setErrors] = useState()
+    const errorHandler = () => {
+        setErrors()
+    }
 
     const statuses = ["NEW", "ACTIVE", "CLOSED"]
     const priorities = ["P0", "P1", "P2"]
 
     const [users, setUsers] = useState()
 
-    console.log(customer);
+    console.log("err", errors);
     function handleSubmit(e) {
         e.preventDefault();
         fetch("/cases", {
@@ -43,7 +47,7 @@ function NewCase() {
                 r.json().then((s) => console.log("s", s))
                     .then(navigate("/home"))
             } else {
-                r.json().then((err) => console.log(err.errors))
+                r.json().then((err) => setErrors(err.errors))
             }
         });
     }
@@ -85,7 +89,10 @@ function NewCase() {
         return (
 
 
-            <div >
+            <div style={{ padding: "5px 50px 75px 50px" }}>
+
+                {errors && <ErrorModal message={errors} onClose={errorHandler} />}
+
                 <form align='center' onSubmit={handleSubmit} class="form" >
                     <label htmlFor="title">Title</label>
                     <input
