@@ -8,6 +8,7 @@ import EditCase from "./EditCase";
 import NewComment from "./NewComment";
 import CommentCard from "./CommentCard";
 import ErrorModal from "./ErrorModal";
+import "./CaseView.css";
 
 
 function CurrentCase() {
@@ -98,23 +99,25 @@ function CurrentCase() {
 
 
         return (
-            < div 
-            style={{ padding: "5px 50px 75px 50px" }} >
-                                {errors && <ErrorModal message={errors} onClose={errorHandler} />}
-
-                <h1>{thisCase.title}</h1>
+           
+            <div style={{padding: "5px 50px 75px 100px"}}>
+            < div  id="currentcase"  
+            >
+                {errors && <ErrorModal message={errors} onClose={errorHandler} />}
+                
+                            <h1 id="currentcase"> {thisCase.title} </h1>
+                            
                 {thisCase.assigned ? (
                     <div>
-                        <br></br>
                         <button onClick={handleDeleteClick}>
                             <span role="img" aria-label="delete">
-                                🗑
+                                DELETE
                             </span>
                         </button>
 
-                        <button onClick={() => setIsEditing((isEditing) => !isEditing)}>
-                            <span role="img" aria-label="edit">
-                                ✏️
+                        <button onClick={() => setIsEditing((isEditing) => !isEditing)} >
+                            <span role="img" aria-label="edit" >
+                                EDIT
                             </span>
                         </button>
                     </div>) :
@@ -125,13 +128,13 @@ function CurrentCase() {
                         </span>
                     </button>
                 }
-                <h3>Customer Name:</h3>
+                <h3 id="currentcase">Customer Name:</h3>
                 {thisCase.user.name}
-                <h3>Case Description:</h3>
+                <h3 id="currentcase">Case Description:</h3>
                 {thisCase.description}
-                <h3>Case Status:</h3>
+                <h3 id="currentcase">Case Status:</h3>
                 {thisCase.status}
-                <h3>Case Priority:</h3>
+                <h3 id="currentcase">Case Priority:</h3>
                 {thisCase.priority}
 
                 {/* <tr key={thisCase.id}>
@@ -152,12 +155,14 @@ function CurrentCase() {
 
 
 
-                <h3> Case Comments: </h3>
+                <h3 > Case Comments: </h3>
                 <CommentCard comments={thisCase.comments} />
 
                 <h3> Add Comment: </h3>
                 <NewComment caseId={id} setThisCase={setThisCase} />
             </div>
+            </div>
+            
         )
     } else {
         return (

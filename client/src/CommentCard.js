@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, {  } from "react";
+// import { useNavigate } from "react-router-dom";
 
 
 function CommentCard( {comments} ) {
@@ -9,8 +9,8 @@ function CommentCard( {comments} ) {
     // t.string "creator_name"
     // t.boolean "is_agent"
 
-    const navigate = useNavigate();
-    const [comment, setComment] = useState("");
+    // const navigate = useNavigate();
+    // const [comment, setComment] = useState("");
 
     console.log("testing commentcard")
 

@@ -36,7 +36,7 @@ function Login() {
 
 
   return (
-    <div align="center">
+    <div align="center" style={{ padding: "5px 50px 75px 50px" }} >
                 {errors && <ErrorModal message={errors} onClose={errorHandler} />}
 
 

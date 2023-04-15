@@ -44,7 +44,7 @@ function SignUp({ setAgent }) {
 
   return (
     
-    <div>
+    <div style={{ padding: "5px 50px 75px 50px" }} >
       { errors && <ErrorModal  message={errors} onClose={errorHandler} /> } 
 
       <form onSubmit={handleSubmit}>
