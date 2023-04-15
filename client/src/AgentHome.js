@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { AgentContext } from "./context/agent.js"
 import { CaseContext } from "./context/CaseContext.js";
 import AgentOpenCases from "./AgentOpenCases.js";

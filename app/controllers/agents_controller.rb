@@ -3,7 +3,6 @@ class AgentsController < ApplicationController
     agent = Agent.create(agent_params)
     if agent.valid?
       session[:user_id] = agent.id #still don't quite understand this
-      byebug
       render json: agent, status: :created
     else
       render json: { errors: agent.errors.full_messages }, status: :unprocessable_entity

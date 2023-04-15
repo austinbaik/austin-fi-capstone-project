@@ -11,7 +11,7 @@ function Login() {
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState();
   const errorHandler = () => {
     setErrors()
 }
