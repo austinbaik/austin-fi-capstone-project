@@ -2,9 +2,80 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+
+## React Front-end
+
+Component files can be found here: `client/src/`
+
+index.js
+    App 
+        NavBar
+        SignUp
+            ErrorModal
+        Login
+            ErrorModal
+        Landing
+        NewCase
+            ErrorModal
+        AgentHome 
+            AgentOpenCases 
+                CurrentCase
+                    ErrorModal
+                    EditCase
+                        ErrorModal
+                    CommentCard
+                        ErrorModal
+                    NewComment
+                        ErrorModal
+            AllClosedCases 
+                CurrentCase
+                        ErrorModal
+                        EditCase
+                            ErrorModal
+                        CommentCard
+                            ErrorModal
+                        NewComment
+                            ErrorModal
+            AllUnassignedCases 
+                CurrentCase
+                    ErrorModal
+                    EditCase
+                        ErrorModal
+                    CommentCard
+                        ErrorModal
+                    NewComment
+                        ErrorModal
+
+
+## Styling: 
+
+This application includes some basic CSS formatting. You can update the colors/styling to fit your brand identity by updating the files.
+
+CSS files are broken-up into five different files :
+
+        -modal.css
+        -Table.css 
+        -index.css
+        -App.css 
+        -CaseView.css
+
+
+## Additional technical components used 
+
+State management throughout the application is handled through useContext. Context files can be found in `client/src/context`. 
+
+Error messages are rendered via modal `ErrorModal.css`
+
+`react-router-dom` provides additional hooks for app functionalities: 
+    useParams, 
+    useNavigate
+    Link 
+    Routes 
+    Route  
+
 ## Available Scripts
 
-In the project directory, you can run:
+In the project's React directory `/app/client` , you can run:
 
 ### `npm start`
 
@@ -39,32 +110,3 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

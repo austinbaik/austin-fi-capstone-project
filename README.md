@@ -1,9 +1,67 @@
-# Project Template: React/Rails API
+# Basic Customer Support Portal (Agent Experience Only )
+
 
 ## Description
 
-This project is scaffolded so that you can build a React frontend and Rails
-backend together, and easily deploy them to Render.
+This code provides the initial application and backend scaffolding for a simple customer support application. This code provides the front-end experience for ONLY the support agent to view and manage client support cases and provides the back-end data model for agents, users and support cases. 
+
+This code is intended to allow businesses to customize the framework for their needs. You will need to build out the user model to fit your needs, as well as the case details. 
+
+
+## Phase 5 Flatiron School Capstone Project 
+
+This project was created to fulfill the final capstone project requirements for the Flatiron School engineering bootcamp. 
+
+The backend is built with Ruby on Rails, and the front-end is built using a standard React framework.
+
+## How to Start: 
+
+From the application file directory, you can run the follow commands: 
+ 
+
+`rails s` , to start the Rails server &&
+`npm -start --prefix client` , to start the front-end client 
+
+
+*Note that the React front-end and the Rails are included in this repo; the React components are nested under the `client` folder. 
+
+
+## Data Models: 
+
+The data models can be found in `/app/models` - the active record assoociations can be viewed there. 
+
+There are FIVE models: 
+
+-agent_case.rb
+-agent.rb
+-case.rb
+-comment.rb
+-user.rb
+
+AgentCase joins the Agent and User in a many-to-many relationship. By design, when a NEW case is "claimed" by an agent, a new AgentCase object is created joining the Agent and case creator (User). Should the agent ownership bw changed, the agent_id is set up to be changed to the new agent_id. 
+
+## Schema
+
+schema.rb is located in `app/db/schema.rb` - The schema for agent, case and comment are coded to support a generic support use case. Based on business requirements, schema can be updated to accommodate additional fields. **NOTE: You will need to add additional fields on the React front end to render new data fields**
+
+
+## Security 
+
+The application does NOT include additional user or agent sign-up validations; If you intend to deploy this to support customers, you are strongly encouraged to add additional sign-up validations. 
+
+Password log-in security is provided via the `bcrypt` ruby gem. 
+
+
+
+### Front-end Component Structure & Hierarcy: 
+
+PLEASE SEE README.MD @ /src/README.md 
+
+
+
+
+### Instructions to Deploy the Application to Render: 
+
 
 **Note**: if you are not planning to deploy your app to Render and prefer to use
 SQLite, you will need to make the following changes in the project files:
@@ -23,43 +81,6 @@ SQLite, you will need to make the following changes in the project files:
 See Environment Setup below for instructions on installing these tools if you
 don't already have them.
 
-## Setup
-
-Start by **cloning** (not forking) the project template repository and removing
-the remote:
-
-```console
-$ git clone git@github.com:learn-co-curriculum/project-template-react-rails-api.git your-project-name
-$ cd your-project-name
-$ git remote rm origin
-```
-
-Then, [create a new remote repository][create repo] on GitHub. Head to
-[github.com](https://github.com) and click the **+** icon in the top-right
-corner and follow the steps to create a new repository. **Important**: don't
-check any of the options such as 'Add a README file', 'Add a .gitignore file',
-etc. — since you're importing an existing repository, creating any of those
-files on GitHub will cause issues.
-
-[create repo]: https://docs.github.com/en/github/importing-your-projects-to-github/importing-source-code-to-github/adding-an-existing-project-to-github-using-the-command-line#adding-a-project-to-github-without-github-cli
-
-If you're working with a partner,
-[add them as a collaborator][add collaborator] on GitHub. From your repo on
-GitHub, go to Settings > Manage Access > Invite a collaborator and enter your
-partner's username. Once your partner has access, they should git **clone** (not
-fork) the repository.
-
-[add collaborator]: https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-user-account/managing-access-to-your-personal-repositories/inviting-collaborators-to-a-personal-repository
-
-Finally, connect the GitHub remote repository to your local repository and push
-up your code:
-
-```console
-$ git remote add origin git@github.com:your-username/your-project-name.git
-$ git push -u origin main
-```
-
-When you're ready to start building your project, run:
 
 ```sh
 bundle install
@@ -355,10 +376,4 @@ troubleshoot:
 
 
 
-
-
-
-
-auth at log-in 
-auth at case take, edit and delete 
 

@@ -8,8 +8,8 @@ import EditCase from "./EditCase";
 import NewComment from "./NewComment";
 import CommentCard from "./CommentCard";
 import ErrorModal from "./ErrorModal";
-import "./CaseView.css";
-
+// import "./CaseView.css";
+import "./CSS/CaseView.css"
 
 function CurrentCase() {
 
